@@ -1,0 +1,101 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100vh;
+    background-color: lightgray;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+header {
+    background-color: dimgray;
+    margin: auto;
+}
+
+.header-content {
+    position: relative;
+    margin: auto;
+    max-width: 980px;
+    overflow: hidden;
+}
+
+.logo {
+    float: left;
+    width: 50px;
+}
+
+.logoName {
+    display: block;
+    font-size: large;
+    color: #61DAFB;
+    margin-top: 15px;
+    float: left;
+    margin-left: 0;
+    font-weight: bold;
+}
+
+.logo img {
+    float: left;
+    width: 55px;
+    height: 55px;
+}
+
+nav {
+    float: right;
+}
+
+header ol {
+    margin: 0;
+}
+
+.navItem {
+    float: left;
+    margin-left: 5px;
+    display: block;
+    padding: 18px 16px;
+    background: linear-gradient(to bottom, rgba(147, 206, 222, 1) 0%, rgba(117, 189, 209, 1) 41%, rgba(73, 165, 191, 1) 100%);
+    /*border-color: black;*/
+    border: 1px solid gray;
+}
+
+.navItem:hover{
+    background: linear-gradient(to bottom, rgba(177, 236, 252, 1) 0%, rgba(147, 219, 239, 1) 41%, rgba(103, 195, 221, 1) 100%);
+}
+
+.navItem:active{
+    background: linear-gradient(to bottom, rgba(147, 206, 222, 0.5) 0%, rgba(117, 189, 209, 0.5) 41%, rgba(73, 165, 191, 0.5) 100%);
+    color: #61DAFB;
+}
+
+main {
+    margin: auto;
+    max-width: 980px;
+    background-color: whitesmoke;
+    overflow: hidden;
+    height: 100vh;
+}
+
+article {
+    overflow: auto;
+    padding: 20px;
+}
+
+p {
+    text-align: justify;
+    text-indent: 50px;
+}
+
+footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    margin: auto;
+    background-color: gray;
+}
