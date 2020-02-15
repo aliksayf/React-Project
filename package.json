@@ -1,5 +1,5 @@
 {
-  "homepage": "http://aliksayf.github.io/react-project",
+  "homepage": "https://aliksayf.github.io/react-project",
   "name": "cra1",
   "version": "0.1.0",
   "private": true,
@@ -17,7 +17,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "react-project -d build"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

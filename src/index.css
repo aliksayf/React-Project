@@ -51,7 +51,7 @@ nav {
     float: right;
 }
 
-header ol {
+header ul {
     margin: 0;
 }
 
@@ -79,6 +79,7 @@ main {
     max-width: 980px;
     background-color: whitesmoke;
     overflow: hidden;
+    //margin-top: 0;
     height: 100vh;
 }
 
@@ -93,9 +94,28 @@ p {
 }
 
 footer {
-    position: fixed;
     width: 100%;
     bottom: 0;
     margin: auto;
     background-color: gray;
+}
+
+footer nav {
+    float: left;
+}
+
+footer .navItem {
+    float: none;
+    padding: 0;
+    background: none;
+    margin-left: 30px;
+}
+
+footer .navItem:hover {
+    background: none;
+}
+
+footer a {
+    text-decoration: none;
+    color: black;
 }

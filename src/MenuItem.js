@@ -1,11 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
 
-function MenuItem() {
+function MenuItem(props) {
+    console.log();
+
   return (
-      <a href="">
+      <a href={props.menuData.link}>
         <li className='navItem'>
-            Menu Item
+            {props.menuData.text}
         </li>
       </a>
   );
