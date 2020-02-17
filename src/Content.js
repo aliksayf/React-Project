@@ -1,21 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState} from 'react';
 
-function Content () {
+function Content(props) {
 
-        let searchValue = '';
-
-        const inputHandler = (e) => {
-            searchValue = e.target.value
+        let[searchValue, setValue] = useState('')
+        let newValue = '';
+       const inputHandler = (e) => {
+            newValue = e.target.value
         }
 
         const clickButtonHandler = () => {
-
+            setValue(searchValue = `"${newValue}" not found`);
         }
         return (
             <main>
                 <input type='text' onChange={inputHandler}/>
                 <button onClick={clickButtonHandler}>Search</button>
+                <p>{searchValue} </p>
                 <h2>Content</h2>
                 <article>
                     <p>
@@ -46,6 +46,8 @@ function Content () {
                     </p>
 
                 </article>
+
+
             </main>
         );
     }
