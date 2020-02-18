@@ -14,10 +14,12 @@ function Counter(props) {
     }
 
     return (
-        <div>
+        <div className='counter'>
+            {props.name}: {' '}
             <button onClick={() => countChangeHandler('-')}>-</button>
-            {value}
+            {' '}{value}{' '}
             <button onClick={() => countChangeHandler('+')}>+</button>
+            <hr/>
         </div>
     )
 }

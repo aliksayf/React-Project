@@ -4,6 +4,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Content from "./Content";
 import Counter from "./Counter";
+import AddNew from "./AddNew";
 
 
 const item = [
@@ -51,8 +52,13 @@ const copyRight = [{
 
 function App() {
 
-    const num1 = 0, num2 = 0;
-    const [total, setTotal] = useState(num1 + num2);
+    const counters = [
+        {name:'First counter', number: 45, id: 1},
+        {name: 'second', number: 3, id: 2}
+    ]
+    let [counterList, setCounterList] = useState(counters)
+
+    let [total, setTotal] = useState(counters[0].number + counters[1].number);
 
     function buttonClick(val) {
         if (val === '+') {
@@ -64,14 +70,22 @@ function App() {
         console.log(val)
     }
 
+    function addNewCounter(nameArg, value) {
+        let newC = [...counterList, {name: nameArg.name, number: value.number, id: counterList.length + 1}]
+        setCounterList(counterList = newC);
+        setTotal(counterList.map(el => el.number).reduce((a, b) => a + b));
+        console.log(counterList);
+    }
+
     return (
         <div className="App">
             <Header menuItem={item}/>
             <Content/>
-            <hr/>
-            <Counter num={num1} bc={buttonClick}/>
-            <Counter num={num2} bc={buttonClick}/>
             Total: {total}
+            <hr/>
+            {counterList.map(el => <Counter key={el.id} num={el.number} name={el.name} bc={buttonClick}/>)}
+
+            <AddNew adnc={addNewCounter}/>
             <Footer menuItem={item} menuFooter={itemFooter} menuCopy={copyRight}/>
         </div>
     );
