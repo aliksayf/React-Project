@@ -21,13 +21,16 @@ function Counter(props) {
         setValue(value - value);
     }
 
+
+
     return (
         <div className='counter'>
             {props.name}: {' '}
             <button onClick={() => countChangeHandler('-')}>-</button>
             {' '}{props.num}{' '}
             <button onClick={() => countChangeHandler('+')}>+</button>
-            <button onClick={reset}>reset {props.name}</button>
+            <button onClick={reset}>Reset {props.name}</button>
+            <button onClick={() => props.delCounter(props.id)}>Delete {props.name}</button>
             <hr/>
         </div>
     )

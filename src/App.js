@@ -24,7 +24,7 @@ const item = [
         text: 'Contact',
         link: 'cont-page'
     }
-]
+];
 
 const itemFooter = [
     {
@@ -43,7 +43,7 @@ const itemFooter = [
         text: 'map',
         link: 'map-page'
     }
-]
+];
 
 const copyRight = [{
     link: 'alik.sayf',
@@ -53,10 +53,10 @@ const copyRight = [{
 function App() {
 
     const counters = [
-        {name:'First counter', number: 0, id: 1},
+        {name: 'First counter', number: 0, id: 1},
         {name: 'second', number: 0, id: 2}
-    ]
-    let [counterList, setCounterList] = useState(counters)
+    ];
+    let [counterList, setCounterList] = useState(counters);
 
     let [total, setTotal] = useState(counters[0].number + counters[1].number);
 
@@ -72,7 +72,7 @@ function App() {
     }
 
     function addNewCounter(nameArg, value) {
-        let newC = [...counterList, {name: nameArg.name, number: value.number, id: counterList.length + 1}]
+        let newC = [...counterList, {name: nameArg.name, number: value.number, id: counterList.length + 1}];
         setCounterList(counterList = newC);
         setTotal(counterList.map(el => el.number).reduce((a, b) => a + b));
         //console.log(counterList);
@@ -82,16 +82,24 @@ function App() {
         const idx = counterList.findIndex(el => el.id === id);
         //const oldValue = counterList[idx];
         const newValue = {name: name, number: value, id: id};
-        const newList = [ ...counterList.slice(0, idx),
-                            newValue,
-                            ...counterList.slice(idx + 1)]  ;
+        const newList = [...counterList.slice(0, idx),
+            newValue,
+            ...counterList.slice(idx + 1)];
         setCounterList(counterList = newList);
         setTotal(counterList.map(el => el.number).reduce((a, b) => a + b));
         //setCounterList(counterList[id - 1].number = value);
         console.log(counterList);
     }
 
-    function totalReset () {
+    function deleteCounter(id) {
+        const idx = counterList.findIndex(el => el.id === id);
+        const newList = [...counterList.slice(0, idx),
+            ...counterList.slice(idx + 1)];
+        setCounterList(counterList = newList);
+        setTotal(counterList.map(el => el.number).reduce((a, b) => a + b));
+    }
+
+    function totalReset() {
         setCounterList(counters);
         setTotal(counters[0].number + counters[1].number);
         //console.log(counterList, total)
@@ -101,14 +109,19 @@ function App() {
         <div className="App">
             <Header menuItem={item}/>
             <Content/>
-            Total: {total}
-            <button onClick={totalReset}>Reset All</button>
-            <hr/>
-            {counterList.map(el => <Counter key={el.id} num={el.number} name={el.name} id={el.id}
-                                            bc={buttonClick}
-                                            update={update}/>)}
+            <calc className='calculator'>
 
-            <AddNew adnc={addNewCounter}/>
+                Total: {total}
+                <button onClick={totalReset}>Reset All</button>
+                <hr/>
+                {counterList.map(el => <Counter key={el.id} num={el.number} name={el.name} id={el.id}
+                                                bc={buttonClick}
+                                                update={update}
+                                                delCounter={deleteCounter}/>)}
+
+                <AddNew adnc={addNewCounter}/>
+
+            </calc>
             <Footer menuItem={item} menuFooter={itemFooter} menuCopy={copyRight}/>
         </div>
     );
