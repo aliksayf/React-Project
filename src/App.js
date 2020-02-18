@@ -53,28 +53,48 @@ const copyRight = [{
 function App() {
 
     const counters = [
-        {name:'First counter', number: 45, id: 1},
-        {name: 'second', number: 3, id: 2}
+        {name:'First counter', number: 0, id: 1},
+        {name: 'second', number: 0, id: 2}
     ]
     let [counterList, setCounterList] = useState(counters)
 
     let [total, setTotal] = useState(counters[0].number + counters[1].number);
 
-    function buttonClick(val) {
+    function buttonClick(val, id, num) {
         if (val === '+') {
             setTotal(total + 1);
+            setCounterList(counterList[id - 1].number = num);
         }
         if (val === '-') {
             setTotal(total - 1);
         }
-        console.log(val)
+        //console.log(val)
     }
 
     function addNewCounter(nameArg, value) {
         let newC = [...counterList, {name: nameArg.name, number: value.number, id: counterList.length + 1}]
         setCounterList(counterList = newC);
         setTotal(counterList.map(el => el.number).reduce((a, b) => a + b));
+        //console.log(counterList);
+    }
+
+    function update(name, value, id) {
+        const idx = counterList.findIndex(el => el.id === id);
+        //const oldValue = counterList[idx];
+        const newValue = {name: name, number: value, id: id};
+        const newList = [ ...counterList.slice(0, idx),
+                            newValue,
+                            ...counterList.slice(idx + 1)]  ;
+        setCounterList(counterList = newList);
+        setTotal(counterList.map(el => el.number).reduce((a, b) => a + b));
+        //setCounterList(counterList[id - 1].number = value);
         console.log(counterList);
+    }
+
+    function totalReset () {
+        setCounterList(counters);
+        setTotal(counters[0].number + counters[1].number);
+        //console.log(counterList, total)
     }
 
     return (
@@ -82,8 +102,11 @@ function App() {
             <Header menuItem={item}/>
             <Content/>
             Total: {total}
+            <button onClick={totalReset}>Reset All</button>
             <hr/>
-            {counterList.map(el => <Counter key={el.id} num={el.number} name={el.name} bc={buttonClick}/>)}
+            {counterList.map(el => <Counter key={el.id} num={el.number} name={el.name} id={el.id}
+                                            bc={buttonClick}
+                                            update={update}/>)}
 
             <AddNew adnc={addNewCounter}/>
             <Footer menuItem={item} menuFooter={itemFooter} menuCopy={copyRight}/>

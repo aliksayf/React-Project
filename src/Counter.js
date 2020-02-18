@@ -5,20 +5,29 @@ function Counter(props) {
     const countChangeHandler = (sign) => {
         if (sign === '+') {
             setValue(value + 1);
-            props.bc('+')
+            props.bc('+', props.id, value + 1)
+            props.update(props.name, (props.num + 1), props.id);
+            console.log(value);
         }
+        console.log(value)
         if (sign === '-') {
             setValue(value - 1);
             props.bc('-')
         }
     }
 
+    const reset = () => {
+        props.update(props.name, 0,props.id)
+        setValue(value - value);
+    }
+
     return (
         <div className='counter'>
             {props.name}: {' '}
             <button onClick={() => countChangeHandler('-')}>-</button>
-            {' '}{value}{' '}
+            {' '}{props.num}{' '}
             <button onClick={() => countChangeHandler('+')}>+</button>
+            <button onClick={reset}>reset {props.name}</button>
             <hr/>
         </div>
     )
