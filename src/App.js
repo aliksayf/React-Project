@@ -107,22 +107,29 @@ function App() {
 
     return (
         <div className="App">
-            <Header menuItem={item}/>
-            <Content/>
-            <calc className='calculator'>
+            <div className='base'>
 
-                Total: {total}
+            <Header menuItem={item}/>
+            {/*<Content/>*/}
+            <div className='calculator'>
+
+                <div className='name'>Total: </div>
+                <div className='numbers'>{total}</div>
                 <button onClick={totalReset}>Reset All</button>
                 <hr/>
-                {counterList.map(el => <Counter key={el.id} num={el.number} name={el.name} id={el.id}
+                {counterList.map(el => <Counter key={el.id}
+                                                num={el.number}
+                                                name={el.name}
+                                                id={el.id}
                                                 bc={buttonClick}
                                                 update={update}
                                                 delCounter={deleteCounter}/>)}
 
                 <AddNew adnc={addNewCounter}/>
 
-            </calc>
+            </div>
             <Footer menuItem={item} menuFooter={itemFooter} menuCopy={copyRight}/>
+            </div>
         </div>
     );
 }

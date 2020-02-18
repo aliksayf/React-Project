@@ -118,3 +118,46 @@ footer a {
     text-decoration: none;
     color: black;
 }
+
+.calculator {
+    margin: auto;
+    max-width: 700px;
+    background-color: whitesmoke;
+    overflow: hidden;
+    padding: 50px;
+    text-align: left;
+}
+
+
+.calculator button, input {
+    padding: 0 7px;
+    margin: 2px 5px;
+    align-content: end;
+    width: 150px;
+    height: 50px;
+}
+
+.name {
+    text-align: right;
+    display: inline-block;
+    width: 150px;
+    height: 50px;
+    margin: 0 10px;
+    padding-right: 5px;
+}
+
+.counter {
+    margin: 10px 0;
+}
+
+.calculator  .operator {
+    width: 50px;
+}
+
+.numbers {
+    display: inline-block;
+    width: 25px;
+    text-align: right;
+    padding-right: 5px;
+    height: 50px;
+}

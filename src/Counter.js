@@ -25,13 +25,13 @@ function Counter(props) {
 
     return (
         <div className='counter'>
-            {props.name}: {' '}
-            <button onClick={() => countChangeHandler('-')}>-</button>
-            {' '}{props.num}{' '}
-            <button onClick={() => countChangeHandler('+')}>+</button>
+            <div className='name'>{props.name}: </div>
+            <button className='operator' onClick={() => countChangeHandler('-')}>-</button>
+            <div className='numbers'>{props.num}</div>
+            <button className='operator' onClick={() => countChangeHandler('+')}>+</button>
             <button onClick={reset}>Reset {props.name}</button>
             <button onClick={() => props.delCounter(props.id)}>Delete {props.name}</button>
-            <hr/>
+
         </div>
     )
 }
