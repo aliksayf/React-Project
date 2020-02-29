@@ -119,36 +119,67 @@ footer a {
     color: black;
 }
 
-.calculator {
-    margin: auto;
-    max-width: 700px;
-    background-color: whitesmoke;
-    overflow: hidden;
-    padding: 50px;
-    text-align: left;
+.myModal {
+    display: none;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    top: 10%;
+    left: 50%;
+    align-self: center;
+    width: 500px;
+    height: 10%;
+    margin-left: -250px;
+    background-color: red;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    padding: 10px;
+    float: none;
+    text-align: center;
 }
 
+.myModalFooter button {
+    float: right;
+}
 
-.calculator button, input {
-    padding: 0 7px;
-    margin: 2px 5px;
-    align-content: end;
-    width: 150px;
-    height: 50px;
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+/*.calculator {*/
+/*    margin: auto;*/
+/*    max-width: 700px;*/
+/*    background-color: whitesmoke;*/
+/*    overflow: hidden;*/
+/*    padding: 50px;*/
+/*    text-align: left;*/
+/*}*/
+
+
+.calculator button {
+    min-width: 30px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-left: 5px;
+}
+
+.input1 {
+    max-width: 25%;
+    float: left;
 }
 
 .name {
     text-align: right;
     display: inline-block;
-    width: 150px;
-    height: 50px;
-    margin: 0 10px;
-    padding-right: 5px;
+    width: 170px;
+    float: left;
 }
 
-.counter {
-    margin: 10px 0;
-}
+/*.counter {*/
+/*    margin: 10px 0;*/
+/*}*/
 
 .calculator  .operator {
     width: 50px;
@@ -158,6 +189,6 @@ footer a {
     display: inline-block;
     width: 25px;
     text-align: right;
-    padding-right: 5px;
-    height: 50px;
+    padding: 15px 10px;
+    margin-left: 5px;
 }

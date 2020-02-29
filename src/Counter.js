@@ -1,38 +1,40 @@
 import React, {useState} from 'react';
+import { Col, ListGroupItem, Button, Row, Alert } from 'reactstrap';
 
 function Counter(props) {
     const [value, setValue] = useState(props.num)
     const countChangeHandler = (sign) => {
         if (sign === '+') {
-            setValue(value + 1);
-            props.bc('+', props.id, value + 1)
-            props.update(props.name, (props.num + 1), props.id);
-            console.log(value);
+            props.bc('+', props.id)
         }
         console.log(value)
         if (sign === '-') {
-            setValue(value - 1);
-            props.bc('-')
+            props.bc('-', props.id)
         }
     }
 
     const reset = () => {
-        props.update(props.name, 0,props.id)
+        props.update(props.name, props.id)
         setValue(value - value);
     }
 
-
-
     return (
-        <div className='counter'>
-            <div className='name'>{props.name}: </div>
-            <button className='operator' onClick={() => countChangeHandler('-')}>-</button>
-            <div className='numbers'>{props.num}</div>
-            <button className='operator' onClick={() => countChangeHandler('+')}>+</button>
-            <button onClick={reset}>Reset {props.name}</button>
-            <button onClick={() => props.delCounter(props.id)}>Delete {props.name}</button>
+        <ListGroupItem className='counter'>
+            {/*<Row>*/}
+            {/*    <Col md='5'>*/}
+                    <Alert color='light' className='name'>{props.name}: </Alert>
+                    <Button outline color="secondary" className='operator' onClick={() => countChangeHandler('-')}>-</Button>
+                    <div className='numbers'>{props.num}</div>
+                    <Button outline color="secondary" className='operator' onClick={() => countChangeHandler('+')}>+</Button>
+                {/*</Col>*/}
+                {/*<Col md='5'>*/}
+                    <Button color="secondary" onClick={reset}>Reset</Button>
+                    <Button color="danger" onClick={() => props.delCounter(props.id, props.name)}>Delete</Button>
+            {/*    </Col>*/}
 
-        </div>
+            {/*</Row>*/}
+
+        </ListGroupItem>
     )
 }
 

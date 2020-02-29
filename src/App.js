@@ -5,6 +5,8 @@ import Footer from "./Footer";
 import Content from "./Content";
 import Counter from "./Counter";
 import AddNew from "./AddNew";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Alert, ListGroupItem} from 'reactstrap';
 
 
 const item = [
@@ -53,69 +55,117 @@ const copyRight = [{
 function App() {
 
     const counters = [
-        {name: 'First counter', number: 0, id: 1},
-        {name: 'second', number: 0, id: 2}
+        {name: '1 counter', number: 0, id: 1},
+        {name: '2 counter', number: 0, id: 2}
     ];
+    const shown = {
+        'display': 'block'
+    };
+    const hidden = {
+        'display': 'none'
+    };
     let [counterList, setCounterList] = useState(counters);
+    const [maxId, setMaxId] = useState(100);
+    const [modal, setModal] = useState(false );
+    const [confirmName, setConfirmName] = useState('');
+    const [confirmId, setConfirmId] = useState();
+    const [inputedName, setInputedName] = useState('');
+    const [active, setActive] = useState(true);
+    const [show, setShow] = useState(hidden)
 
-    let [total, setTotal] = useState(counters[0].number + counters[1].number);
+    const toggle = (id, name) => {
+        setModal(!modal);
+        setConfirmName(name);
+        setConfirmId(id)
+    }
 
-    function buttonClick(val, id, num) {
+    function buttonClick(val, id) {
+        const idx = counterList.findIndex(el => el.id === id)
+        const newCounterList = [...counterList];
         if (val === '+') {
-            setTotal(total + 1);
-            setCounterList(counterList[id - 1].number = num);
+            newCounterList[idx].number = newCounterList[idx].number + 1;
         }
         if (val === '-') {
-            setTotal(total - 1);
+            newCounterList[idx].number = newCounterList[idx].number - 1;
         }
-        //console.log(val)
+        setCounterList(newCounterList);
     }
 
     function addNewCounter(nameArg, value) {
-        let newC = [...counterList, {name: nameArg.name, number: value.number, id: counterList.length + 1}];
-        setCounterList(counterList = newC);
-        setTotal(counterList.map(el => el.number).reduce((a, b) => a + b));
-        //console.log(counterList);
+        let newC = [...counterList, {name: nameArg.name, number: value.number, id: maxId + 1}];
+        setMaxId(maxId + 1);
+        setCounterList(newC);
+        console.log(counterList)
     }
 
-    function update(name, value, id) {
+    function update(name, id) {
         const idx = counterList.findIndex(el => el.id === id);
-        //const oldValue = counterList[idx];
-        const newValue = {name: name, number: value, id: id};
-        const newList = [...counterList.slice(0, idx),
-            newValue,
-            ...counterList.slice(idx + 1)];
-        setCounterList(counterList = newList);
-        setTotal(counterList.map(el => el.number).reduce((a, b) => a + b));
-        //setCounterList(counterList[id - 1].number = value);
-        console.log(counterList);
+        const newCounterList = [...counterList];
+        newCounterList[idx].number = 0;
+        setCounterList(newCounterList);
     }
 
-    function deleteCounter(id) {
-        const idx = counterList.findIndex(el => el.id === id);
-        const newList = [...counterList.slice(0, idx),
-            ...counterList.slice(idx + 1)];
-        setCounterList(counterList = newList);
-        setTotal(counterList.map(el => el.number).reduce((a, b) => a + b));
+    function deleteCounter() {
+        const id = confirmId;
+        const newList = counterList.filter(el => el.id !== id);
+        setCounterList(newList);
+        toggle();
+    }
+
+    function confirmInputedName (e) {
+        if(e.target.value.trim() === confirmName.trim()) {
+            setActive(false);
+        }
+        console.log(e.target.value, active)
     }
 
     function totalReset() {
-        setCounterList(counters);
-        setTotal(counters[0].number + counters[1].number);
-        //console.log(counterList, total)
+        let newCounterLIst = counterList.map(el => ({...el, number: 0}))
+        setCounterList(newCounterLIst);
+        setShow(shown)
     }
 
-    return (
-        <div className="App">
-            <div className='base'>
+    function closeModal() {
+        if(show === shown) {
+            setShow(hidden)
+        }
+        console.log(show !== shown)
+    }
 
+    // window.onclick = function(event) {
+    //     // if (event.target == modal) {
+    //     //     modal.style.display = "none";
+    //     // }
+    //     console.log(event.target === )
+    // }
+
+    return (
+        <div className="container" >
+            <div className='myModal' style={show}>
+                Reset all counters?
+                <div className='myModalFooter'>
+                    <button>Cancel</button>
+                    <button>Reset</button>
+                </div>
+            </div>
+            <div onClick={closeModal}>
             <Header menuItem={item}/>
             {/*<Content/>*/}
+            <Modal isOpen={modal} toggle={toggle} >
+                <ModalBody>
+                    Enter counter name <strong>{confirmName}</strong> to delete it {inputedName}
+                    <input onChange={confirmInputedName} ></input>
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="secondary" onClick={toggle}>Cancel</Button>
+                    <Button color="danger" disabled={active} onClick={deleteCounter} type='Submit'>Delete</Button>{' '}
+                </ModalFooter>
+            </Modal>
             <div className='calculator'>
 
-                <div className='name'>Total: </div>
-                <div className='numbers'>{total}</div>
-                <button onClick={totalReset}>Reset All</button>
+                <Alert color='light' className='name'>Total: </Alert>
+                <div className='numbers'>{counterList.map(el => el.number).reduce((a, b) => a + b)}</div>
+                <Button onClick={totalReset}>Reset All</Button>
                 <hr/>
                 {counterList.map(el => <Counter key={el.id}
                                                 num={el.number}
@@ -123,13 +173,13 @@ function App() {
                                                 id={el.id}
                                                 bc={buttonClick}
                                                 update={update}
-                                                delCounter={deleteCounter}/>)}
+                                                delCounter={toggle}/>)}
 
                 <AddNew adnc={addNewCounter}/>
 
             </div>
             <Footer menuItem={item} menuFooter={itemFooter} menuCopy={copyRight}/>
-            </div>
+        </div>
         </div>
     );
 }

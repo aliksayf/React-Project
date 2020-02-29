@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
+import {Button, ListGroupItem, Input, Alert, Col, Row} from 'reactstrap';
 
 function AddNew(props) {
-    let [name, setName] = useState('')
-    let [number, setNumber] = useState('')
+    const [name, setName] = useState('')
+    const [number, setNumber] = useState('')
 
     const inputHandlerName = (e) => {
-        setName(name = e.target.value);
+        setName(e.target.value);
     }
 
     const inputHandlerNumber = (e) => {
-        setNumber(number = parseInt(e.target.value));
+        setNumber(parseInt(e.target.value));
     }
     function onSubmit(e) {
         e.preventDefault();
@@ -18,21 +19,23 @@ function AddNew(props) {
         setNumber ('');
     }
     return (
-        <form onSubmit={onSubmit}>
-            Add new counter
-            <input type='text'
-                   placeholder='initial value'
-                   value ={name}
-                   required
-                   onChange={inputHandlerName}/>
-            <input type="number"
-                   placeholder="Enter value"
-                   value = {number}
-                   size = '10'
-                   required
-                   onChange={inputHandlerNumber}/>
-            <button >Add counter</button>
-        </form>
+        <ListGroupItem onSubmit={onSubmit}>
+                    <Alert  color='light'  className='name'>
+                        Add new counter
+                    </Alert>
+                    <Input className='input1' type='text'
+                           placeholder='Counter name'
+                           value ={name}
+                           required
+                           onChange={inputHandlerName}/>
+                    <Input className='input1' type="numbers"
+                           placeholder="Counter value"
+                           value = {number}
+                           size = '10'
+                           required
+                           onChange={inputHandlerNumber}/>
+                    <Button color="primary">Add counter</Button>
+        </ListGroupItem>
     )
 }
 
