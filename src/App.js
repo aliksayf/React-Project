@@ -4,6 +4,7 @@ import './App.css';
 import Header from "./Header";
 import Footer from "./Footer";
 import Content from "./Content";
+import Number from "./buttons/Number";
 
 
 const item = [
@@ -53,7 +54,8 @@ function App() {
     return (
         <div className="App">
             <Header menuItem={item}/>
-            <Content/>
+            {/*<Content/>*/}
+            <Number/>
             <Footer menuItem={item} menuFooter={itemFooter} menuCopy={copyRight}/>
         </div>
     );

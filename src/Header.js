@@ -11,7 +11,7 @@ function Header(props) {
             <div className='header-content'>
                 <Logo/>
                 <div className='logoName'>React JS course</div>
-                <Menu menuItem={props.menuItem}/>
+                <Menu menuItem={props.menuItem} />
             </div>
 
         </header>
