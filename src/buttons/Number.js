@@ -39,7 +39,7 @@ export default function Number() {
 
     return (
         <div className="App">
-            <h2>Array of buttons</h2>
+            <h2>Array of buttons </h2>
             <h3>Enter two numbers</h3>
             <h3 style={{ color: 'red'}}>{warn}</h3>
             gap from  <span/>
